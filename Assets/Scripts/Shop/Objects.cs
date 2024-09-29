@@ -5,7 +5,7 @@ using UnityEngine;
 public class Objects 
 {
     string? name;
-    string[] type; //["Weapon", "Armor", "Accesory", "Item"];
+    string[] type = { "Weapon", "Armor", "Accesory", "Item" };
     int Price;
 
     public Objects(string Names, string[] Types, int Prices)
