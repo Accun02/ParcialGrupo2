@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHighScore : MonoBehaviour
 {
 
-
+    public enum ShortType //enum that funciontss as a simple StateMachine
+    {
+        Desending,
+        Asending,
+    }
+    ShortType shortType = ShortType.Desending;
     public List<Player> listPlayers = new List<Player>();
     public GameObject prefabPlayerDisplay;
     public Transform layoutGroup;
+
+    private string[] names = { "Juan", "Alejo", "Andre","Dorothy","Griddy","Garcia" };
     void Start()
     {
         for (int i = 0; i < 10; i++)
         {
-            InsertPlayer(i, "playerDefault" + i, Random.Range(0, 1001));
+            int NamesIndex = names.Length - 1;
+       
+               int Selected = Random.Range(0, NamesIndex);
+            
+
+            InsertPlayer(i, names[Selected], Random.Range(0, 1001));
         }
     }
 
@@ -28,22 +41,50 @@ public class PlayerHighScore : MonoBehaviour
         h.Set(p.Id, p.Nombre, p.Score);
     }
 
-    public void DescendingShort()
+    public void Shorts()
     {
-        for (int i = 0; i < listPlayers[i].Score; i++)
+        for (int i = 0; i < listPlayers.Count; i++) 
         {
-            for (int j = 0; j < listPlayers.Count - 1; j++)
+
+            switch (shortType)
             {
-                if (listPlayers[j].Score > listPlayers[j + 1].Score)
-                {
-                    var tempVar = listPlayers[j].Score;
-                    listPlayers[j].Score = listPlayers[j + 1].Score;
-                    listPlayers[j + 1].Score = tempVar;
-                }
+                case ShortType.Desending:
+                    DesendingShort();
+                    break;
+
+                case ShortType.Asending:
+                    AsendingShort();
+                    break;
             }
-
+            
+              
+            
         }
+      
+    }
 
+    private void AsendingShort()
+    {
+      
+    }
+
+    private void DesendingShort()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void setShortasdes()
+    {
+        
+        shortType = ShortType.Desending;
+        Shorts();
+
+    }
+    public void setShortasas()
+    {
+
+        shortType = ShortType.Asending;
+        Shorts();
 
     }
 }
