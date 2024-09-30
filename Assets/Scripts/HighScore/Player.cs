@@ -1,4 +1,6 @@
-﻿public class Player
+﻿using UnityEngine;
+
+public class Player 
 {
     private int id; //Creamos una variable de int numeros enteros
     private string name; // Creamos otra variable de string tipo textos

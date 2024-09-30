@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHighScore : MonoBehaviour
 {
-
-  private  enum ShortType //enum that funciontss as a simple StateMachine
-    {
-        Desending,
-        Asending,
-    }
-   private  ShortType shortType = ShortType.Desending;
     private string[] names = { "Juan", "Alejo", "Andre", "Dorothy", "Griddy", "Garcia" };
-
+    private List<GameObject> gameObjectlist = new List<GameObject>();  
     public List<Player> listPlayers = new List<Player>();
     public GameObject prefabPlayerDisplay;
     public Transform layoutGroup;
@@ -24,29 +18,54 @@ public class PlayerHighScore : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            int NamesIndex = Random.Range(0, listPlayers.Count);
+            int NamesIndex = Random.Range(0, names.Length);
 
           
             
 
-            InsertPlayer(i, names[NamesIndex], Random.Range(0, 1001));
+            InsertPlayer(i + 1, names[NamesIndex], Random.Range(0, 1001));
         }
     }
 
 
-    private void InsertPlayer(int id, string nombre, int score)
+    private void InsertPlayer(int id, string name, int score)
     {
-        Player p = new Player(id, nombre, score);
-        listPlayers.Add(p);
-        GameObject g = Instantiate(prefabPlayerDisplay, layoutGroup, true);
-        PlayerHighScoreDisplay h = g.GetComponent<PlayerHighScoreDisplay>();
-        h.Set(p.Id, p.Name, p.Score);
+        Player player =  new Player(id, name, score);
+        listPlayers.Add(player);
+        GameObject prefab = Instantiate(prefabPlayerDisplay, layoutGroup, true);
+        PlayerHighScoreDisplay hsDisplay = prefab.GetComponent<PlayerHighScoreDisplay>();
+        hsDisplay.Set(player.Id, player.Name, player.Score);
+        gameObjectlist.Add(prefab);
     }
 
      
     private void AsendingShort()
     {
-      
+        int cycles = 0;
+       var list = listPlayers.Count;
+     do
+        {
+            for (int i = 0; i < list - 1; i++)
+            {
+                for (int j = 0; j < list - 1; j++)
+                {
+                    if (listPlayers[j].Score > listPlayers[j + 1].Score)
+                    {
+                        var tempVar = listPlayers[j].Score;
+                        listPlayers[j].Score = listPlayers[j + 1].Score;
+
+                        listPlayers[j + 1].Score = tempVar;
+
+                        gameObjectlist[j + 1].transform.SetSiblingIndex(j + 1);
+                        gameObjectlist[j].transform.SetSiblingIndex(j);
+                        cycles++;
+                    }
+                }
+
+
+
+            }
+        }while (cycles < list);
     }
 
     private void DesendingShort()
@@ -56,17 +75,14 @@ public class PlayerHighScore : MonoBehaviour
 
     public void setShortasdes()
     {
-        
-        shortType = ShortType.Desending;
-    DesendingShort();
-
+        Debug.Log("funcaA");
+        DesendingShort();
     }
     public void setShortasas()
     {
-
-        shortType = ShortType.Asending;
-      AsendingShort();
-
+        Debug.Log("funcaB");
+        AsendingShort();
+     
     }
 }
 
