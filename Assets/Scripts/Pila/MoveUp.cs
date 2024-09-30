@@ -2,7 +2,7 @@
 
 public class MoveUp : Icommand
 {
-    float movevel = 1.5f; //velocity between 
+    float movevel = 1; //velocity between 
     Vector3 Lastpos;
     private PlayerControls playerControls;
     public MoveUp(PlayerControls playerControls)
@@ -14,7 +14,7 @@ public class MoveUp : Icommand
     public void Execute()
     {
         Lastpos = playerControls.transform.position;
-        playerControls.transform.position += new Vector3( 0, movevel, 0); //moves character in x
+        playerControls.transform.position += new Vector3( 0, movevel , 0); //moves character in x
 
 
     }

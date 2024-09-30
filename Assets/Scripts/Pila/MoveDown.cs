@@ -2,7 +2,7 @@
 
 public class MoveDown : Icommand
 {
-    float movevel = 1.5f; //velocity between 
+    float movevel = 1; //velocity between 
     Vector3 Lastpos;
     private PlayerControls playerControls;
     public MoveDown(PlayerControls playerControls)

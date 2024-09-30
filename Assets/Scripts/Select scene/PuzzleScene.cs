@@ -16,4 +16,9 @@ public class PuzzleScene : MonoBehaviour
     {
         SceneManager.LoadScene("Inventory");
     }
+
+    public void ChangeQuestline()
+    {
+        SceneManager.LoadScene("Questline");
+    }
 }

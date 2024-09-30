@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-
-    float movevel = 1.5f; //velocity between 
     public Stack<Icommand> charactmov = new Stack<Icommand>();
     private void Update()
     {
@@ -46,9 +44,13 @@ public class PlayerControls : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R)) 
         {
-       Icommand lastpos = charactmov.Pop(); //saves the last position before being deleted from the stack
+            if (charactmov.Count > 0) 
+            {
+                Icommand lastpos = charactmov.Pop(); //saves the last position before being deleted from the stack
 
-            lastpos.Undo(); //Executes method, sending the last position from the stack
+                lastpos.Undo(); //Executes method, sending the last position from the stack
+            }
         }
+   
     }
 }

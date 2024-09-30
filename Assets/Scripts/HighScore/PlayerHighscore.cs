@@ -70,7 +70,8 @@ public class PlayerHighScore : MonoBehaviour
 
     private void DesendingShort()
     {
-        throw new System.NotImplementedException();
+      
+
     }
 
     public void setShortasdes()
