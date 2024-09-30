@@ -445,7 +445,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1551612757}
         m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
-        m_MethodName: Complete
+        m_MethodName: FinishQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1c48537219c1d4686429144533dc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest:
+  quests:
   - {fileID: 3570098139849400638, guid: c1c5641243d093e4289bfb44218bc03e, type: 3}
   - {fileID: 7063929303257868720, guid: 7138d93904d8a114d86ab15f824968c1, type: 3}
   - {fileID: 6573688171450244655, guid: 81a439d8cc632544a9b95b645abca4ec, type: 3}
