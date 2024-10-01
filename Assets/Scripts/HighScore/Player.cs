@@ -9,8 +9,8 @@ public class Player :MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
 
     public TextMeshProUGUI ScoreText { get { return scoreText; } }
-    int score;
-    int id;
+    private int score;
+
 
     public int Score => score;
 

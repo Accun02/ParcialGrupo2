@@ -19,7 +19,7 @@ public class PlayerHighScore : MonoBehaviour
     private string[] names = { "Juan", "Alejo", "Andre", "Dorothy", "Griddy", "Garcia" };
 
    
-    enum selectedDisplay
+    private enum selectedDisplay
     {
         toptobottom,
         bottomtotop,
@@ -53,16 +53,16 @@ public class PlayerHighScore : MonoBehaviour
     public void SelectedAscendedShort()
     {
         selectedisplay = selectedDisplay.toptobottom;
-        Shortting();
+        Shorting();
     }
 
     public void SelectedDesendedShort()
     {
       selectedisplay = selectedDisplay.bottomtotop;
-        Shortting();
+        Shorting();
     }
 
-    private void Shortting()
+    private void Shorting()
     {
         Player nextItem = null;
         int indexNext = -1;

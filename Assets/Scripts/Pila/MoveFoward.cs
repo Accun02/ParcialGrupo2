@@ -15,7 +15,6 @@ public class MoveFoward : Icommand
     {
         Lastpos = playerControls.transform.position;
         playerControls.transform.position += new Vector3(movevel, 0, 0); //moves character in x
-        
     }
 
     public void Undo()

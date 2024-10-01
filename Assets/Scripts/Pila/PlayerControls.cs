@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public Stack<Icommand> charactmov = new Stack<Icommand>();
+    private Stack<Icommand> charactmov = new Stack<Icommand>();
     private void Update()
     {
         Inputs();
@@ -15,10 +15,9 @@ public class PlayerControls : MonoBehaviour
     {
        if (Input.GetKeyDown(KeyCode.D)) 
         {
-
-            Icommand movefoward = new MoveFoward(this);
-            movefoward.Execute();
-        charactmov.Push(movefoward);//saves position in stack
+           Icommand movefoward = new MoveFoward(this);
+           movefoward.Execute();
+           charactmov.Push(movefoward);//saves position in stack
      
         }
         if (Input.GetKeyDown(KeyCode.A))
@@ -47,7 +46,6 @@ public class PlayerControls : MonoBehaviour
             if (charactmov.Count > 0) 
             {
                 Icommand lastpos = charactmov.Pop(); //saves the last position before being deleted from the stack
-
                 lastpos.Undo(); //Executes method, sending the last position from the stack
             }
         }

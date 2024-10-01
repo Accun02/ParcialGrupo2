@@ -21,7 +21,6 @@ public class Nextext : MonoBehaviour
 
     private void Update()
     {
- 
         Inputs();
         writing();
     }
@@ -30,9 +29,7 @@ public class Nextext : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Y))
         {
-
             CanWrite = true;
-
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -46,7 +43,7 @@ public class Nextext : MonoBehaviour
     {
         if (stack.Count > 0 && insertedtext != string.Empty) // cuando ya tiene un elemento en el stack
         {
-             stack.Pop();
+            stack.Pop();
             stack.Push(insertedtext);   
             Oldtext.text = stack.Peek();
 
@@ -63,12 +60,10 @@ public class Nextext : MonoBehaviour
 
     private void writing()
     {
-      
          if (CanWrite)
         {
             insertedtext += Input.inputString; //escribir texto
             text.text = insertedtext; 
-
         }
 
         
