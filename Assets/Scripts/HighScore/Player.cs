@@ -1,22 +1,34 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
-public class Player 
+public class Player :MonoBehaviour
 {
-    private int id; //Creamos una variable de int numeros enteros
-    private string name; // Creamos otra variable de string tipo textos
-    private int score; // Creamos una variable de int numeros enteros
 
-    public int Id { get => id; set => id = value; } //Propiedad que estan publicas exponen los valores internos de esta clase player
-                                                    //Get permite que otras clases puedan ver el contenido de la variable id
-                                                    //Set permite que otras clases puedan cambiar el contenido de la variable id
-    public string Name { get => name; set => name = value; }
-    public int Score { get => score; set => score = value; }
+    [SerializeField] private TextMeshProUGUI idText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
- 
-    public Player(int id, string name, int score) //Es un constrcutor que recibe valores (parametrizado)
+    public TextMeshProUGUI ScoreText { get { return scoreText; } }
+    int score;
+    int id;
+
+    public int Score => score;
+
+
+    public void SetText(string number, string name, string score)
     {
-        this.id = id;
-        this.name = name;
-        this.score = score;
+        nameText.text = name;
+        scoreText.text = score;
+        idText.text =  (transform.GetSiblingIndex() + 1).ToString();
+    }
+    public void SetValue(int Score)
+    { 
+    
+        this.score = Score;
+    }
+    public void SetCurrentOrderNumber(Transform parent, int index)
+    {
+        transform.SetSiblingIndex(index);
+        idText.text = (transform.GetSiblingIndex() + 1).ToString();
     }
 }

@@ -1,77 +1,133 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
+using UnityEditor.ShortcutManagement;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PlayerHighScore : MonoBehaviour
 {
+    private List<Player> players = new List<Player>();
+    [SerializeField] private Player prefabScore;
+    [SerializeField] private Player highScore;
+    [SerializeField] private Transform parent;
     private string[] names = { "Juan", "Alejo", "Andre", "Dorothy", "Griddy", "Garcia" };
-    private List<GameObject> gameObjectlist = new List<GameObject>();  
-    public List<Player> listPlayers = new List<Player>();
-    public GameObject prefabPlayerDisplay;
-    public Transform layoutGroup;
 
-    
-    private void Start()
+   
+    enum selectedDisplay
+    {
+        toptobottom,
+        bottomtotop,
+    }
+    selectedDisplay  selectedisplay = selectedDisplay.toptobottom;
+    private void Awake()
     {
         for (int i = 0; i < 10; i++)
         {
-            int NamesIndex = Random.Range(0, names.Length);
+            int NameIndex = Random.Range(0, names.Length);
 
-            InsertPlayer(i + 1, names[NamesIndex], Random.Range(0, 1001));
+            AddPlayer(i.ToString(), names[NameIndex], Random.Range(1, 1000));
         }
+
     }
 
-
-    private void InsertPlayer(int id, string name, int score)
+    private void AddPlayer(string number, string name, int score)
     {
-        Player player =  new Player(id, name, score);
-        listPlayers.Add(player);
-        GameObject prefab = Instantiate(prefabPlayerDisplay, layoutGroup, true);
-        PlayerHighScoreDisplay hsDisplay = prefab.GetComponent<PlayerHighScoreDisplay>();
-        hsDisplay.Set(player.Id, player.Name, player.Score);
-        gameObjectlist.Add(prefab);
+        Player newplayer = Instantiate(prefabScore, parent);
+
+        string scoreText = score.ToString();
+
+
+        newplayer.SetText(number, name, scoreText);
+        newplayer.SetValue(score);
+        players.Add(newplayer);
+
+
     }
 
-
-    private void AsendingShort()
+    public void SelectedAscendedShort()
     {
+        selectedisplay = selectedDisplay.toptobottom;
+        Shortting();
+    }
 
-        var list = listPlayers.Count;
-        for (int i = 0; i < list - 1; i++)
+    public void SelectedDesendedShort()
+    {
+      selectedisplay = selectedDisplay.bottomtotop;
+        Shortting();
+    }
+
+    private void Shortting()
+    {
+        Player nextItem = null;
+        int indexNext = -1;
+        int numberSorted = 0;
+
+        while (numberSorted < players.Count)
         {
-            for (int j = 0; j < list - 1; j++)
+            for (int i = 0; i < players.Count - numberSorted; i++)
             {
-                if (listPlayers[j].Score > listPlayers[j + 1].Score)
+                Player currentItem = players[i];
+                indexNext = i;
+
+               
+
+                        if (i != players.Count - numberSorted - 1)
+                        {
+                            indexNext = indexNext + 1;
+
+                            nextItem = players[indexNext];
+                            currentItem = players[i];
+
+                            
+                            switch (selectedisplay)
+                            {
+                            case selectedDisplay.toptobottom:
+                             {
+                                if (nextItem.Score > currentItem.Score)
+                                {
+                                    (players[indexNext], players[i]) = (players[i], players[indexNext]); //crea dos contrructores y los asigna
+                                }
+
+                                players[i].SetCurrentOrderNumber(parent, i);
+                                players[indexNext].SetCurrentOrderNumber(parent, indexNext);
+                             }
+                            break;
+                             case selectedDisplay.bottomtotop:
+                               {
+
+                                if (nextItem.Score < currentItem.Score)
+                                {
+                                    (players[indexNext], players[i]) = (players[i], players[indexNext]);
+                                }
+
+                                players[i].SetCurrentOrderNumber(parent, i);
+                                players[indexNext].SetCurrentOrderNumber(parent, indexNext);
+                               }
+                            break;
+                              }
+
+                          
+                        }
+                  
+              
+                else
                 {
-                    var tempVar = listPlayers[j].Score;
-                    listPlayers[j].Score = listPlayers[j + 1].Score;
-
-                    listPlayers[j + 1].Score = tempVar;
-
+                    numberSorted++;
                 }
             }
         }
     }
-
-    private void DesendingShort()
-    {
-      
-
-    }
-
-    public void setShortasdes()
-    {
-        Debug.Log("funcaA");
-        DesendingShort();
-    }
-    public void setShortasas()
-    {
-        Debug.Log("funcaB");
-        AsendingShort();
-     
-    }
 }
+
+ 
+
+
+
+
 
