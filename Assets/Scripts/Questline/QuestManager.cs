@@ -55,7 +55,7 @@ public class QuestManager : MonoBehaviour
 
             if (newQuest == true)
             {
-                currentMission = Instantiate(noquest, questpos);
+                currentMission = Instantiate(noquest, questpos.transform);
                 newQuest = false;
             }
 
