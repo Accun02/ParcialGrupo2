@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Nextext : MonoBehaviour
 {
@@ -14,8 +10,8 @@ public class Nextext : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private TextMeshProUGUI Oldtext;
     private Stack<string> stack = new Stack<string>();
-    [SerializeField] private Transform oldtexttrans; 
-   
+    [SerializeField] private Transform oldtexttrans;
+
 
     bool CanWrite = false;
 
@@ -35,8 +31,8 @@ public class Nextext : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             CanWrite = false;
-            moveText();        
-        }            
+            moveText();
+        }
     }
 
     private void moveText()
@@ -44,7 +40,7 @@ public class Nextext : MonoBehaviour
         if (stack.Count > 0 && insertedtext != string.Empty) // cuando ya tiene un elemento en el stack
         {
             stack.Pop();
-            stack.Push(insertedtext);   
+            stack.Push(insertedtext);
             Oldtext.text = stack.Peek();
 
         }
@@ -60,13 +56,10 @@ public class Nextext : MonoBehaviour
 
     private void writing()
     {
-         if (CanWrite)
+        if (CanWrite)
         {
             insertedtext += Input.inputString; //escribir texto
-            text.text = insertedtext; 
+            text.text = insertedtext;
         }
-
-        
     }
-        
 }

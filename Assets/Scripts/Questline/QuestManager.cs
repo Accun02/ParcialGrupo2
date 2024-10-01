@@ -44,9 +44,8 @@ public class QuestManager : MonoBehaviour
 
     private void nextquest()
     {
-        if (missionQueue.Count > 0)
+        if (missionQueue.TryPeek(out GameObject newquest))
         {
-            missionQueue.TryPeek(out GameObject newquest); //se fija si hay nuevas
             currentMission = Instantiate(newquest, questpos); // la intancia
         }
 
