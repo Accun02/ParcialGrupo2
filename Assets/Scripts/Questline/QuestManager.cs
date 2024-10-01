@@ -10,12 +10,12 @@ using static UnityEditor.Progress;
 public class QuestManager : MonoBehaviour
 {
     private Queue <GameObject> missionQueue = new Queue <GameObject> ();
-    [SerializeField] private GameObject[] quests; // array que guarda las primeras instancias de las quest
+    [SerializeField] private GameObject[] quests; // array que guarda las  instancias de las quest
     private GameObject currentMission;
     bool newQuest = true;
-    [SerializeField] private GameObject noquest;
+    [SerializeField] private GameObject noquest; //objeto que guarda cuando no hay mas quest
     [SerializeField] private Transform questpos; //que se quede centrada en pantalla
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -27,7 +27,6 @@ public class QuestManager : MonoBehaviour
         currentMission = Instantiate( newquest, questpos );   //se intancia y se guarda en el gameobject current mission
     }
 
-    // Update is called once per frame
      public void FinishQuest()
     {
        

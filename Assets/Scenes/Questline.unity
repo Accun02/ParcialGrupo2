@@ -529,7 +529,7 @@ MonoBehaviour:
   - {fileID: 3570098139849400638, guid: c1c5641243d093e4289bfb44218bc03e, type: 3}
   - {fileID: 7063929303257868720, guid: 7138d93904d8a114d86ab15f824968c1, type: 3}
   - {fileID: 6573688171450244655, guid: 81a439d8cc632544a9b95b645abca4ec, type: 3}
-  noquest: {fileID: 2510945010920846079, guid: 79e15fe0cdf982d4299552e71dd8c0fa, type: 3}
+  noquest: {fileID: 151437435451604758, guid: 908a75f367d3c784c8fd205a0ef9e822, type: 3}
   questpos: {fileID: 332425868}
 --- !u!114 &1551612758
 MonoBehaviour:
