@@ -20,9 +20,6 @@ public class PlayerHighScore : MonoBehaviour
         {
             int NamesIndex = Random.Range(0, names.Length);
 
-          
-            
-
             InsertPlayer(i + 1, names[NamesIndex], Random.Range(0, 1001));
         }
     }
@@ -38,34 +35,25 @@ public class PlayerHighScore : MonoBehaviour
         gameObjectlist.Add(prefab);
     }
 
-     
+
     private void AsendingShort()
     {
-        int cycles = 0;
-       var list = listPlayers.Count;
-     do
+
+        var list = listPlayers.Count;
+        for (int i = 0; i < list - 1; i++)
         {
-            for (int i = 0; i < list - 1; i++)
+            for (int j = 0; j < list - 1; j++)
             {
-                for (int j = 0; j < list - 1; j++)
+                if (listPlayers[j].Score > listPlayers[j + 1].Score)
                 {
-                    if (listPlayers[j].Score > listPlayers[j + 1].Score)
-                    {
-                        var tempVar = listPlayers[j].Score;
-                        listPlayers[j].Score = listPlayers[j + 1].Score;
+                    var tempVar = listPlayers[j].Score;
+                    listPlayers[j].Score = listPlayers[j + 1].Score;
 
-                        listPlayers[j + 1].Score = tempVar;
+                    listPlayers[j + 1].Score = tempVar;
 
-                        gameObjectlist[j + 1].transform.SetSiblingIndex(j + 1);
-                        gameObjectlist[j].transform.SetSiblingIndex(j);
-                        cycles++;
-                    }
                 }
-
-
-
             }
-        }while (cycles < list);
+        }
     }
 
     private void DesendingShort()
